@@ -1,0 +1,62 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 23,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "linux_x86",
+            "displayName": "Linux_x86",
+            "description": "Default build on host machine",
+            "generator": "Unix Makefile",
+            "binaryDir": "${sourceDir}/build_x86",
+            "installDir": "${sourceDir}/build_x86/install",
+            "cacheVariables": {
+                "TARGET_OS": "LINUX",
+                "TARGET_ARCH": "X86"
+            }
+        },
+        {
+            "name": "rpi",
+            "displayName": "Raspberry PI zero W",
+            "description": "Build for default target - Raspberry PI zero W",
+            "generator": "Unix Makefile",
+            "binaryDir": "${sourceDir}/build_rpi",
+            "installDir": "${sourceDir}/build_rpi/install",
+            "cacheVariables": {
+                "TARGET_OS": "LINUX",
+                "TARGET_ARCH": "ARM11"
+            },
+            "environment": {
+                "MY_ENVIRONMENT_VARIABLE": "Test"
+            }
+        },
+        {
+            "name": "windows-only",
+            "displayName": "Windows-only configuration",
+            "description": "This build is only available on Windows",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default"
+        }
+    ],
+    "packagePresets": [
+        {
+            "name": "default",
+            "configurePreset": "default",
+            "generators": [
+                "TGZ"
+            ]
+        }
+    ]
+}
